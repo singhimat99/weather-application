@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
-export default function CitySearch() {
+export default function CitySearch({ showSidebar, toggleVisibility }) {
   return (
-    <div className="search-container">
+    <div
+      className={showSidebar ? "search-container active" : "search-container"}
+    >
       <div className="search-form-container">
         <form>
           <input type="text" placeholder="search for a city..." />
@@ -10,9 +12,12 @@ export default function CitySearch() {
         </form>
       </div>
       <div className="results-container">
-        <p>London</p>
-        <p>London</p>
+        <div onClick={toggleVisibility}>London</div>
+        <div>London</div>
       </div>
+      <button onClick={toggleVisibility} className="x-btn">
+        X
+      </button>
     </div>
   );
 }
