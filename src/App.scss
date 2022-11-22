@@ -13,6 +13,7 @@
 $dark-background: #100e1d;
 $lighter-background: #1e213a;
 $hightlight1: #3c47e9;
+$hightlight2: #88869d;
 body {
   width: 100vw;
 }
@@ -45,6 +46,7 @@ body {
     align-items: center;
     gap: 2rem;
     transition: all 0.5s ease;
+
     .x-btn {
       width: 40px;
       aspect-ratio: 1;
@@ -76,6 +78,7 @@ body {
 
         input {
           background: none;
+          color: white;
           border: 1px solid white;
           padding: 1rem;
           flex-grow: 1;
@@ -90,12 +93,31 @@ body {
     }
     .results-container {
       height: 70%;
-      width: 80%;
+      width: 70%;
+      overflow: auto;
+      transition: all 0.4s;
 
-      * {
+      div {
         border: 1px solid white;
         padding: 1rem;
         margin: 0.5rem 0;
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.4s;
+
+        .arrow {
+          display: none;
+        }
+
+        &:hover {
+          width: 100%;
+          .arrow {
+            display: block;
+          }
+        }
       }
     }
   }
@@ -106,12 +128,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
 
-    * {
-      width: 100%;
-    }
-    .search-or-location {
+    .btns-container {
       display: flex;
       justify-content: space-between;
+      width: 100%;
 
       button {
         width: 40px;
@@ -121,6 +141,7 @@ body {
         font-size: 1.5rem;
         display: flex;
         align-items: center;
+        justify-content: center;
         border: 0.5px solid white;
         transition: all 0.3s;
         background: transparent;
@@ -128,6 +149,39 @@ body {
         &:hover {
           background-color: $hightlight1;
           transform: scale(1.1);
+        }
+      }
+    }
+
+    .weather-info {
+      height: 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .temperature {
+        padding: 2rem;
+        display: flex;
+        font-size: 6rem;
+        p {
+          font-size: 0.5em;
+          color: $hightlight2;
+        }
+      }
+      .condition {
+        font-size: 2rem;
+      }
+      .day-location {
+        color: $hightlight2;
+        margin-bottom: 2rem;
+
+        div {
+          vertical-align: middle;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 1rem;
         }
       }
     }
