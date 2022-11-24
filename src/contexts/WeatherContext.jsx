@@ -43,13 +43,12 @@ export function WeatherProvider({ children }) {
   useEffect(() => {
     async function getData() {
       const data = await getWeatherData(currentCity, "current");
-      console.log(data);
       setCurrentWeatherData(data);
       setPending(false);
     }
     getData();
 
-    getWeatherByCurrentLocation();
+    // getWeatherByCurrentLocation();
   }, [currentCity]);
 
   if (pending) {
