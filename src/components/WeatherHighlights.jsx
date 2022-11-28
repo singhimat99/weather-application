@@ -24,3 +24,7 @@ export default function WeatherHighlights() {
     </section>
   );
 }
+
+function ForecastCards() {
+  return <div className="forecast"></div>;
+}

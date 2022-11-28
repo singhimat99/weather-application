@@ -12,6 +12,7 @@ export function WeatherProvider({ children }) {
   const [currentCity, setCurrentCity] = useState("Fremont");
   const [pending, setPending] = useState(true);
   const [currentWeatherData, setCurrentWeatherData] = useState({});
+  const [currentCoords, setCurrentCoords] = useState("");
 
   async function getWeatherData(city, endpoint) {
     const url = new URL(`/${endpoint}.json`, WEATHER_API_BASE_URL);
@@ -36,9 +37,19 @@ export function WeatherProvider({ children }) {
   function getWeatherByCurrentLocation() {
     if (window.navigator.geolocation) {
       // Geolocation available
-      window.navigator.geolocation.getCurrentPosition(console.log, console.log);
+      window.navigator.geolocation.getCurrentPosition(getCoords, console.warn);
     }
   }
+
+  function getCoords(GeolocationPosition) {
+    const { latitude, longitude } = GeolocationPosition.coords;
+    setCurrentCoords(`${latitude}, ${longitude}`);
+    setCurrentCity(`${latitude}, ${longitude}`);
+  }
+
+  useEffect(() => {
+    getWeatherByCurrentLocation();
+  }, []);
 
   useEffect(() => {
     async function getData() {
@@ -47,8 +58,6 @@ export function WeatherProvider({ children }) {
       setPending(false);
     }
     getData();
-
-    // getWeatherByCurrentLocation();
   }, [currentCity]);
 
   if (pending) {
@@ -59,6 +68,7 @@ export function WeatherProvider({ children }) {
     currentCity,
     setCurrentCity,
     currentWeatherData,
+    currentCoords,
   };
   return (
     <WeatherContext.Provider value={values}>{children}</WeatherContext.Provider>

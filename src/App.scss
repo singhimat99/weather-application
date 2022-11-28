@@ -27,6 +27,7 @@ body {
 .current-weather {
   background-color: $lighter-background;
   height: 100vh;
+  min-height: 850px;
   grid-column: span 2;
   position: relative;
 
@@ -61,10 +62,12 @@ body {
       right: 1rem;
       transition: all 0.3s;
 
-      &:hover {
-        background-color: white;
-        color: $hightlight1;
-        transform: scale(1.05);
+      @media (hover: hover) {
+        &:hover {
+          background-color: white;
+          color: $hightlight1;
+          transform: scale(1.05);
+        }
       }
     }
     .search-form-container {
@@ -113,10 +116,12 @@ body {
           display: none;
         }
 
-        &:hover {
-          width: 100%;
-          .arrow {
-            display: block;
+        @media (hover: hover) {
+          &:hover {
+            width: 100%;
+            .arrow {
+              display: block;
+            }
           }
         }
       }
@@ -148,20 +153,22 @@ body {
         border: 0.5px solid white;
         transition: all 0.3s;
         background: transparent;
-
-        &:hover {
-          background-color: $hightlight1;
-          transform: scale(1.1);
+        @media (hover: hover) {
+          &:hover {
+            background-color: $hightlight1;
+            transform: scale(1.1);
+          }
         }
       }
     }
     .image-container {
       height: 45%;
-      background-size: contain;
       position: relative;
+
       img {
         position: absolute;
-        width: 150px;
+        width: 35%;
+        min-width: 150px;
         top: 50%;
         left: 50%;
         transform: translate(-57%, -50%);
@@ -209,7 +216,8 @@ body {
 }
 .weather-highlights {
   grid-column: span 2;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 850px;
   background-color: $dark-background;
   display: flex;
   flex-direction: column;
