@@ -14,10 +14,12 @@ export function WeatherProvider({ children }) {
   const [pending, setPending] = useState(true);
   const [currentWeatherData, setCurrentWeatherData] = useState({});
   const [currentCoords, setCurrentCoords] = useState("");
+  const [forecastData, setForecastData] = useState("");
 
-  async function getWeatherData(city, endpoint) {
+  async function getWeatherData(city, endpoint, days = null, date = null) {
     const url = new URL(`/${endpoint}.json`, WEATHER_API_BASE_URL);
     url.searchParams.set("q", city);
+    days && url.searchParams.set("days", days);
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -55,14 +57,16 @@ export function WeatherProvider({ children }) {
   useEffect(() => {
     async function getData() {
       const data = await getWeatherData(currentCity, "current");
+      const forecast = await getWeatherData(currentCity, "forecast", 3);
       setCurrentWeatherData(data);
+      setForecastData(forecast);
       setPending(false);
     }
     getData();
   }, [currentCity]);
 
-  function getFullDate(current) {
-    const currentDate = new Date(current.last_updated);
+  function getFullDate(date) {
+    const currentDate = new Date(date);
     const month = [
       "Jan",
       "Feb",
@@ -79,9 +83,9 @@ export function WeatherProvider({ children }) {
     ];
     const dayName = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
 
-    return `Today · ${
-      dayName[currentDate.getDay()]
-    }, ${currentDate.getDate()} ${month[currentDate.getMonth()]}`;
+    return `${dayName[currentDate.getDay()]}, ${currentDate.getDate()} ${
+      month[currentDate.getMonth()]
+    }`;
   }
 
   function useWeatherImage(condition) {
@@ -119,6 +123,7 @@ export function WeatherProvider({ children }) {
     currentCoords,
     getFullDate,
     useWeatherImage,
+    forecastData,
   };
   return (
     <WeatherContext.Provider value={values}>{children}</WeatherContext.Provider>

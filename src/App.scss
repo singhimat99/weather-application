@@ -253,14 +253,41 @@ body {
     display: grid;
     gap: 1rem;
     border: 2px solid red;
-    grid-template-columns: repeat(auto-fit, 100px);
+    grid-template-columns: repeat(auto-fit, 125px);
     align-items: center;
     justify-content: center;
 
     .forecast-card {
       background-color: $lighter-background;
-      aspect-ratio: 1;
+      aspect-ratio: 120/177;
+      position: relative;
       @include center-flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .full-date {
+        position: absolute;
+        top: 10%;
+      }
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -60%);
+        width: 60%;
+      }
+      .temps {
+        bottom: 10%;
+        position: absolute;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .min {
+          color: rgba($color: white, $alpha: 0.6);
+        }
+      }
     }
   }
 
@@ -284,6 +311,7 @@ body {
         background-color: $lighter-background;
         aspect-ratio: 1;
         @include center-flex;
+        flex-direction: column;
       }
     }
   }

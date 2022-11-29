@@ -12,7 +12,7 @@ export default function WeatherInfo({ currentWeatherData }) {
       </div>
       <div className="condition">{current.condition.text}</div>
       <div className="day-location">
-        <div>{getFullDate(current)}</div>
+        <div>Today · {getFullDate(current.last_updated)}</div>
         <div>
           <MdLocationOn /> {location.name}, {location.region}
         </div>
