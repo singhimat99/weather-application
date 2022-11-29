@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import Loading from "../components/Loading";
 
 const WeatherContext = createContext();
 
@@ -61,7 +62,7 @@ export function WeatherProvider({ children }) {
   }, [currentCity]);
 
   if (pending) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
   const values = {
     getWeatherData,

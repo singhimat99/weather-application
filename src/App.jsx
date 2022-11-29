@@ -2,7 +2,7 @@ import React from "react";
 import WeatherHighlights from "./components/WeatherHighlights";
 import CurrentWeather from "./components/CurrentWeather";
 import { WeatherProvider } from "./contexts/WeatherContext";
-import { useState } from "react";
+import Loading from "./components/Loading";
 import "./App.scss";
 
 function App() {
