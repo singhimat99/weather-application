@@ -1,9 +1,9 @@
 import React from "react";
 import clouds from "../images/Cloud-background.png";
-import { useWeatherStats } from "../contexts/WeatherContext";
+import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function WeatherDisplay({ currentWeatherData }) {
-  const { useWeatherImage } = useWeatherStats();
+  const { useWeatherImage } = useWeatherStatsContext();
   const { current } = currentWeatherData;
   const { condition } = current;
   const { weatherImgSrc, loading } = useWeatherImage(condition);

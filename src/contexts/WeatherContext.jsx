@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 
 const WeatherContext = createContext();
 
-export function useWeatherStats() {
+export function useWeatherStatsContext() {
   return useContext(WeatherContext);
 }
 

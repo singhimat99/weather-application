@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CitySearch from "./CitySearch";
-import { useWeatherStats } from "../contexts/WeatherContext";
+import { useWeatherStatsContext } from "../contexts/WeatherContext";
 import { BiCurrentLocation, BiSearch } from "react-icons/bi";
 import WeatherInfo from "./WeatherInfo";
 import WeatherDisplay from "./WeatherDisplay";
 
 export default function CurrentWeather() {
   const { currentWeatherData, setCurrentCity, currentCoords } =
-    useWeatherStats();
+    useWeatherStatsContext();
   const [showSidebar, setShowSidebar] = useState(false);
 
   function toggleVisibility() {

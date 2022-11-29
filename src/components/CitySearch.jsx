@@ -1,9 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useWeatherStats } from "../contexts/WeatherContext";
+import React, { useState, useEffect } from "react";
+import { useWeatherStatsContext } from "../contexts/WeatherContext";
 import { MdArrowForwardIos } from "react-icons/md";
 
 export default function CitySearch({ showSidebar, toggleVisibility }) {
-  const { getWeatherData, currentCity, setCurrentCity } = useWeatherStats();
+  const { getWeatherData, currentCity, setCurrentCity } =
+    useWeatherStatsContext();
   const [cities, setCities] = useState([]);
   const [cityInput, setCityInput] = useState("");
   let timeoutID;

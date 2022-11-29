@@ -1,10 +1,10 @@
 import React from "react";
 import { MdLocationOn } from "react-icons/md";
-import { useWeatherStats } from "../contexts/WeatherContext";
+import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function WeatherInfo({ currentWeatherData }) {
   const { current, location } = currentWeatherData;
-  const { getFullDate } = useWeatherStats();
+  const { getFullDate } = useWeatherStatsContext();
   return (
     <div className="weather-info">
       <div className="temperature">

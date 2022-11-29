@@ -1,8 +1,8 @@
 import React from "react";
-import { useWeatherStats } from "../contexts/WeatherContext";
+import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function Forecast() {
-  const { useWeatherImage, getFullDate, forecastData } = useWeatherStats();
+  const { useWeatherImage, getFullDate, forecastData } = useWeatherStatsContext();
   const { forecast } = forecastData;
   console.log(forecast);
   return (
