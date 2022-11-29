@@ -14,6 +14,11 @@ $dark-background: #100e1d;
 $lighter-background: #1e213a;
 $hightlight1: #3c47e9;
 $hightlight2: #88869d;
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 body {
   width: 100vw;
 }
@@ -23,6 +28,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -38,9 +44,7 @@ body {
   right: 0;
   bottom: 0;
   background-color: #010101;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include center-flex;
   .loading-spinner {
     width: 50px;
     height: 50px;
@@ -53,7 +57,7 @@ body {
 .current-weather {
   background-color: $lighter-background;
   height: 100vh;
-  min-height: 750px;
+  min-height: 850px;
   grid-column: span 2;
   position: relative;
 
@@ -68,10 +72,8 @@ body {
     left: -100%;
     z-index: 100;
     background-color: $lighter-background;
-    display: flex;
+    @include center-flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 2rem;
     transition: all 0.5s ease;
 
@@ -173,9 +175,7 @@ body {
         height: 40px;
         border-radius: 50%;
         font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include center-flex;
         border: 0.5px solid white;
         transition: all 0.3s;
         background: transparent;
@@ -218,7 +218,9 @@ body {
         }
       }
       .condition {
+        border: 2px solid red;
         font-size: 2rem;
+        text-align: center;
       }
       .day-location {
         color: $hightlight2;
@@ -226,9 +228,7 @@ body {
 
         div {
           vertical-align: middle;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          @include center-flex;
           margin: 1rem;
         }
       }
@@ -243,12 +243,10 @@ body {
 .weather-highlights {
   grid-column: span 2;
   height: 100vh;
-  min-height: 750px;
+  min-height: 850px;
   background-color: $dark-background;
-  display: flex;
+  @include center-flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .forecast {
     width: 75%;
@@ -259,9 +257,10 @@ body {
     align-items: center;
     justify-content: center;
 
-    .weather-card {
+    .forecast-card {
       background-color: $lighter-background;
       aspect-ratio: 1;
+      @include center-flex;
     }
   }
 
@@ -284,6 +283,7 @@ body {
       .highlight-card {
         background-color: $lighter-background;
         aspect-ratio: 1;
+        @include center-flex;
       }
     }
   }
