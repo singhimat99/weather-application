@@ -2,9 +2,9 @@ import React from "react";
 import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function Forecast() {
-  const { useWeatherImage, getFullDate, forecastData } = useWeatherStatsContext();
+  const { useWeatherImage, getFullDate, forecastData } =
+    useWeatherStatsContext();
   const { forecast } = forecastData;
-  console.log(forecast);
   return (
     <div className="forecast">
       {forecast.forecastday.map((day, i) => {
@@ -26,8 +26,8 @@ export default function Forecast() {
   );
 }
 
-function tommDate() {
-  const wrong = new Date();
-  const tomm = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-  return `${tomm.getFullYear()}-${tomm.getMonth() + 1}-${tomm.getDate()}`;
-}
+// function tommDate() {
+//   const wrong = new Date();
+//   const tomm = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+//   return `${tomm.getFullYear()}-${tomm.getMonth() + 1}-${tomm.getDate()}`;
+// }

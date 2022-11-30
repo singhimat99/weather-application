@@ -15,6 +15,7 @@ export function WeatherProvider({ children }) {
   const [currentWeatherData, setCurrentWeatherData] = useState({});
   const [currentCoords, setCurrentCoords] = useState("");
   const [forecastData, setForecastData] = useState("");
+  const [isMetric, setIsMetric] = useState(false);
 
   async function getWeatherData(city, endpoint, days = null, date = null) {
     const url = new URL(`/${endpoint}.json`, WEATHER_API_BASE_URL);
@@ -62,31 +63,9 @@ export function WeatherProvider({ children }) {
       setForecastData(forecast);
       setPending(false);
     }
+    setPending(true);
     getData();
   }, [currentCity]);
-
-  function getFullDate(date) {
-    const currentDate = new Date(date);
-    const month = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const dayName = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
-
-    return `${dayName[currentDate.getDay()]}, ${currentDate.getDate()} ${
-      month[currentDate.getMonth()]
-    }`;
-  }
 
   function useWeatherImage(condition) {
     const [weatherImgSrc, setWeatherImgSrc] = useState();
@@ -124,6 +103,8 @@ export function WeatherProvider({ children }) {
     getFullDate,
     useWeatherImage,
     forecastData,
+    isMetric,
+    setIsMetric,
   };
   return (
     <WeatherContext.Provider value={values}>{children}</WeatherContext.Provider>
@@ -165,4 +146,27 @@ function getConditionName(condition) {
 function isPresent(string, text) {
   const regex = new RegExp(string, "gi");
   return regex.test(text);
+}
+
+function getFullDate(date) {
+  const currentDate = new Date(date);
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const dayName = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+
+  return `${dayName[currentDate.getDay()]}, ${currentDate.getDate()} ${
+    month[currentDate.getMonth()]
+  }`;
 }
