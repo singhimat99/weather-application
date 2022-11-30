@@ -6,7 +6,8 @@ export default function WeatherHighlights() {
   return (
     <section className="weather-highlights">
       <div className="measurement">
-        <button></button>
+        <button>°F</button>
+        <button>°C</button>
       </div>
       <Forecast />
       <Highlights />
