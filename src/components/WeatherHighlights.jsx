@@ -1,5 +1,5 @@
 import React from "react";
-import Forecast from "./Forecast";
+import ThreeDayForecast from "./ThreeDayForecast";
 import Highlights from "./Highlights";
 import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
@@ -17,7 +17,7 @@ export default function WeatherHighlights() {
         <button className={!isMetric ? "active" : null} onClick={toggleMetric}>°F</button>
         </div>
       </div>
-      <Forecast />
+      <ThreeDayForecast />
       <Highlights />
     </section>
   );

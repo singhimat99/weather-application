@@ -1,7 +1,7 @@
 import React from "react";
 import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
-export default function Forecast() {
+export default function ThreeDayForecast() {
   const { useWeatherImage, getFullDate, forecastData, isMetric } =
     useWeatherStatsContext();
   const { forecast } = forecastData;
