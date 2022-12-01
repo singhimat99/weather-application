@@ -2,7 +2,7 @@ import React from "react";
 import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function Forecast() {
-  const { useWeatherImage, getFullDate, forecastData } =
+  const { useWeatherImage, getFullDate, forecastData, isMetric } =
     useWeatherStatsContext();
   const { forecast } = forecastData;
   return (
@@ -16,8 +16,8 @@ export default function Forecast() {
             </div>
             {!loading && <img src={weatherImgSrc} alt="forecast image" />}
             <div className="temps">
-              <div className="max">{Math.round(day.day.maxtemp_f)}°F</div>
-              <div className="min">{Math.round(day.day.mintemp_f)}°F</div>
+              <div className="max">{Math.round(isMetric ? day.day.maxtemp_c : day.day.maxtemp_f)}{isMetric ? "°C" : "°F"}</div>
+              <div className="min">{Math.round(isMetric ? day.day.mintemp_c : day.day.mintemp_f)}{isMetric ? "°C" : "°F"}</div>
             </div>
           </div>
         );

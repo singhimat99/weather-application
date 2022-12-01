@@ -23,9 +23,11 @@ $hightlight2: #88869d;
   button {
     width: 40px;
     height: 40px;
+    cursor: pointer;
     border-radius: 50%;
     font-size: 1.5rem;
     @include center-flex;
+    color: white;
     border: 0.5px solid white;
     transition: all 0.3s;
     background: transparent;
@@ -61,7 +63,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #010101;
+  background-color: $dark-background;
   @include center-flex;
   .loading-spinner {
     width: 50px;
@@ -237,14 +239,19 @@ body {
     }
   }
 }
-@media (min-width: 840px) {
+@media (min-width: 912px) {
   .current-weather {
     height: 100vh;
-    grid-column: span 1;
   }
   .weather-highlights {
     height: 100vh;
   }
+}
+@media (min-width: 812px) {
+  .current-weather {
+      grid-column: span 1;
+
+    }
 }
 .weather-highlights {
   grid-column: span 2;
@@ -253,9 +260,41 @@ body {
   @include center-flex;
   flex-direction: column;
   padding: 2rem 0;
+  padding-top: 100px;
+  position: relative;
 
+  .measurement {
+    position: absolute;
+    width: 85%;
+    height: 50px;
+    top: 0;
+    gap: .5rem;
+
+    .toggle-measure-btns {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      display: flex;
+      gap: 1rem;
+
+      button {
+        border-radius: 50%;
+        padding: .75rem;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #585676;
+        border: none;
+      }
+      .active {
+        background-color: white;
+        color: black;
+      }
+    }
+
+    
+  }
   .forecast {
-    width: 75%;
+    width: 85%;
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, 125px);

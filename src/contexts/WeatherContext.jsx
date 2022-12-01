@@ -10,10 +10,16 @@ export function useWeatherStatsContext() {
 const WEATHER_API_BASE_URL = "https://weatherapi-com.p.rapidapi.com";
 
 export function WeatherProvider({ children }) {
-  const [currentCity, setCurrentCity] = useState("Fremont");
+  const [currentCoords, setCurrentCoords] = useState("");
+  const [currentCity, setCurrentCity] = useState(() => {
+    const city = getWeatherByCurrentLocation();
+    console.log("🚀 ~ file: WeatherContext.jsx:16 city", city)
+    
+    return "chicago";
+  });
+
   const [pending, setPending] = useState(true);
   const [currentWeatherData, setCurrentWeatherData] = useState({});
-  const [currentCoords, setCurrentCoords] = useState("");
   const [forecastData, setForecastData] = useState("");
   const [isMetric, setIsMetric] = useState(false);
 
@@ -39,22 +45,27 @@ export function WeatherProvider({ children }) {
   }
 
   function getWeatherByCurrentLocation() {
+    let coords;
+    console.log("🚀 ~ file: WeatherContext.jsx:49 coords", coords)
+    console.log("🚀 ~ file: WeatherContext.jsx:51 window.navigator.geolocation", window.navigator.geolocation)
     if (window.navigator.geolocation) {
       // Geolocation available
-      window.navigator.geolocation.getCurrentPosition(getCoords, console.warn);
+      window.navigator.geolocation.getCurrentPosition((GeolocationPosition) => {
+        const { latitude, longitude } = GeolocationPosition.coords;
+        setCurrentCoords(`${latitude}, ${longitude}`);
+        setCurrentCity(`${latitude}, ${longitude}`);
+        console.log("🚀 ~ file: WeatherContext.jsx:56 coords", coords)
+      }, console.warn);
     }
+    return coords;
   }
 
-  function getCoords(GeolocationPosition) {
-    const { latitude, longitude } = GeolocationPosition.coords;
-    setCurrentCoords(`${latitude}, ${longitude}`);
-    setCurrentCity(`${latitude}, ${longitude}`);
-  }
-
-  useEffect(() => {
-    getWeatherByCurrentLocation();
-  }, []);
-
+  // function getCoords(GeolocationPosition) {
+  //   const { latitude, longitude } = GeolocationPosition.coords;
+  //   setCurrentCoords(`${latitude}, ${longitude}`);
+  //   setCurrentCity(`${latitude}, ${longitude}`);
+  // }
+  
   useEffect(() => {
     async function getData() {
       const data = await getWeatherData(currentCity, "current");
@@ -64,7 +75,12 @@ export function WeatherProvider({ children }) {
       setPending(false);
     }
     setPending(true);
-    getData();
+     if (!currentCoords) {
+      getWeatherByCurrentLocation();
+    }
+    if (currentCoords) {
+      getData();
+    }
   }, [currentCity]);
 
   function useWeatherImage(condition) {

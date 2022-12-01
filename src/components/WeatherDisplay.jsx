@@ -8,7 +8,7 @@ export default function WeatherDisplay({ currentWeatherData }) {
   const { condition } = current;
   const { weatherImgSrc, loading } = useWeatherImage(condition);
   const isCloudy = condition.code > 1005;
-
+  
   const backgroundStyle = {
     backgroundSize: "cover",
     background: isCloudy
