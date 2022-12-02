@@ -11,12 +11,8 @@ const WEATHER_API_BASE_URL = "https://weatherapi-com.p.rapidapi.com";
 
 export function WeatherProvider({ children }) {
     const [currentCoords, setCurrentCoords] = useState("");
-    const [currentCity, setCurrentCity] = useState(() => {
-        const city = getWeatherByCurrentLocation();
-
-        return "chicago";
-    });
-
+    const [currentCity, setCurrentCity] = useState("Fremont");
+    const [isDisabled, setIsDisabled] = useState(false);
     const [pending, setPending] = useState(true);
     const [currentWeatherData, setCurrentWeatherData] = useState({});
     const [forecastData, setForecastData] = useState("");
@@ -52,19 +48,22 @@ export function WeatherProvider({ children }) {
                     const { latitude, longitude } = GeolocationPosition.coords;
                     setCurrentCoords(`${latitude}, ${longitude}`);
                     setCurrentCity(`${latitude}, ${longitude}`);
+                    console.log(currentCity);
                 },
-                console.warn
+                (err) => {
+                    setCurrentCoords("37.5429087, -121.9896938");
+                    setCurrentCity("37.5429087, -121.9896938");
+                    setIsDisabled(true);
+                    console.warn(err);
+                }
             );
+        } else {
+            setCurrentCoords("37.5429087, -121.9896938");
+            setCurrentCity("37.5429087, -121.9896938");
         }
         return coords;
     }
 
-    // function getCoords(GeolocationPosition) {
-    //   const { latitude, longitude } = GeolocationPosition.coords;
-    //   setCurrentCoords(`${latitude}, ${longitude}`);
-    //   setCurrentCity(`${latitude}, ${longitude}`);
-    // }
-    let count = 0;
     useEffect(() => {
         async function getData() {
             const [data, forecast] = await Promise.all([
@@ -77,8 +76,6 @@ export function WeatherProvider({ children }) {
         }
 
         setPending(true);
-        console.log(count);
-        count++;
 
         if (!currentCoords) {
             getWeatherByCurrentLocation();
@@ -129,6 +126,7 @@ export function WeatherProvider({ children }) {
         forecastData,
         isMetric,
         setIsMetric,
+        isDisabled,
     };
     return (
         <WeatherContext.Provider value={values}>

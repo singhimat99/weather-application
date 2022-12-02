@@ -191,6 +191,16 @@ body {
       width: 100%;
 
       @include btn-styles;
+
+      .disabled {
+        background-color: grey;
+        @media (hover: hover) {
+          &:hover {
+            transform: scale(1);
+            background-color: grey;
+          }
+        }
+      }
     }
     .image-container {
       height: 45%;
