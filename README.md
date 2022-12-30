@@ -88,4 +88,4 @@ $ npm start
 ## Contact
 
 -   GitHub [@singhimat99](https://github.com/singhimat99/)
--   Twitter [@himatCodes](https://{twitter.com/himatCodes})
+-   Twitter [@himatCodes](https://twitter.com/HimatCodes)
