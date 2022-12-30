@@ -1,418 +1,416 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: white;
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: white;
 }
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 $dark-background: #100e1d;
 $lighter-background: #1e213a;
 $hightlight1: #3c47e9;
 $hightlight2: #88869d;
 @mixin center-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 @mixin btn-styles {
-  button {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    @include center-flex;
-    color: white;
-    border: 0.5px solid white;
-    transition: all 0.3s;
-    background: transparent;
-    @media (hover: hover) {
-      &:hover {
-        background-color: $hightlight1;
-        transform: scale(1.1);
-      }
+    button {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        @include center-flex;
+        color: white;
+        border: 0.5px solid white;
+        transition: all 0.3s;
+        background: transparent;
+        @media (hover: hover) {
+            &:hover {
+                background-color: $hightlight1;
+                transform: scale(1.1);
+            }
+        }
     }
-  }
 }
 body {
-  width: 100vw;
+    width: 100vw;
 }
 .App {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    width: 100%;
+    // height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 @keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 .spinner-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: $dark-background;
-  @include center-flex;
-  .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #383636; /* Black */
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
-  }
-}
-.current-weather {
-  background-color: $lighter-background;
-  height: 650px;
-  min-height: 850px;
-  grid-column: span 2;
-  position: relative;
-
-  .search-container.active {
-    left: 0;
-  }
-  .search-container {
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 0;
-    left: -100%;
-    z-index: 100;
-    background-color: $lighter-background;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $dark-background;
     @include center-flex;
-    flex-direction: column;
-    gap: 2rem;
-    transition: all 0.5s ease;
-
-    .x-btn {
-      width: 40px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: transparent;
-      border: 0.5px solid white;
-      color: white;
-      font-size: 1rem;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      transition: all 0.3s;
-
-      @media (hover: hover) {
-        &:hover {
-          background-color: white;
-          color: $hightlight1;
-          transform: scale(1.05);
-        }
-      }
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 10px solid #f3f3f3; /* Light grey */
+        border-top: 10px solid #383636; /* Black */
+        border-radius: 50%;
+        animation: spinner 1.5s linear infinite;
     }
-    .search-form-container {
-      width: 70%;
+}
+.current-weather {
+    background-color: $lighter-background;
+    height: 650px;
+    min-height: 750px;
+    grid-column: span 2;
+    position: relative;
 
-      form {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 0.5rem;
-        align-items: center;
-
-        input {
-          background: none;
-          color: white;
-          border: 1px solid white;
-          padding: 1rem;
-          flex-grow: 1;
-        }
-        button {
-          background-color: $hightlight1;
-          padding: 1rem;
-          border: none;
-          color: white;
-        }
-      }
+    .search-container.active {
+        left: 0;
     }
-    .results-container {
-      height: 70%;
-      width: 70%;
-      overflow: auto;
-      transition: all 0.4s;
-
-      div {
-        border: 1px solid white;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        width: 50%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.4s;
-
-        .arrow {
-          display: none;
-        }
-
-        @media (hover: hover) {
-          &:hover {
-            width: 100%;
-            .arrow {
-              display: block;
-            }
-          }
-        }
-      }
-    }
-  }
-  .weather-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .btns-container {
-      display: flex;
-      justify-content: space-around;
-      gap: 50%;
-      align-items: center;
-      height: 15%;
-      width: 100%;
-
-      @include btn-styles;
-
-      .disabled {
-        background-color: grey;
-        @media (hover: hover) {
-          &:hover {
-            transform: scale(1);
-            background-color: grey;
-          }
-        }
-      }
-    }
-    .image-container {
-      height: 45%;
-      position: relative;
-
-      img {
+    .search-container {
+        width: 100%;
+        height: 100%;
         position: absolute;
-        width: 35%;
-        min-width: 150px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-57%, -50%);
-        // border: 2px solid red;
-      }
-    }
-    .weather-info {
-      height: 45%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
+        top: 0;
+        left: -100%;
+        z-index: 100;
+        background-color: $lighter-background;
+        @include center-flex;
+        flex-direction: column;
+        gap: 2rem;
+        transition: all 0.5s ease;
 
-      .temperature {
-        padding: 2rem;
+        .x-btn {
+            width: 40px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: transparent;
+            border: 0.5px solid white;
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            transition: all 0.3s;
+
+            @media (hover: hover) {
+                &:hover {
+                    background-color: white;
+                    color: $hightlight1;
+                    transform: scale(1.05);
+                }
+            }
+        }
+        .search-form-container {
+            width: 70%;
+
+            form {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 0.5rem;
+                align-items: center;
+
+                input {
+                    background: none;
+                    color: white;
+                    border: 1px solid white;
+                    padding: 1rem;
+                    flex-grow: 1;
+                }
+                button {
+                    background-color: $hightlight1;
+                    padding: 1rem;
+                    border: none;
+                    color: white;
+                }
+            }
+        }
+        .results-container {
+            height: 70%;
+            width: 70%;
+            overflow: auto;
+            transition: all 0.4s;
+
+            div {
+                border: 1px solid white;
+                padding: 1rem;
+                margin: 0.5rem 0;
+                width: 50%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                transition: all 0.4s;
+
+                .arrow {
+                    display: none;
+                }
+
+                @media (hover: hover) {
+                    &:hover {
+                        width: 100%;
+                        .arrow {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .weather-container {
+        width: 100%;
+        height: 100%;
         display: flex;
-        font-size: 6rem;
-        p {
-          font-size: 0.5em;
-          color: $hightlight2;
-        }
-      }
-      .condition {
-        font-size: 2rem;
-        text-align: center;
-      }
-      .day-location {
-        color: $hightlight2;
-        margin-bottom: 2rem;
+        flex-direction: column;
+        justify-content: space-between;
 
-        div {
-          vertical-align: middle;
-          @include center-flex;
-          margin: 1rem;
+        .btns-container {
+            display: flex;
+            justify-content: space-around;
+            background: transparent;
+            gap: 50%;
+            align-items: center;
+            height: 15%;
+            width: 100%;
+
+            @include btn-styles;
+
+            .disabled {
+                background-color: grey;
+                @media (hover: hover) {
+                    &:hover {
+                        transform: scale(1);
+                        background-color: grey;
+                    }
+                }
+            }
         }
-      }
+        .image-container {
+            height: 40%;
+            position: relative;
+
+            img {
+                position: absolute;
+                width: 35%;
+                min-width: 150px;
+                top: 40%;
+                left: 50%;
+                transform: translate(-57%, -50%);
+                // border: 2px solid red;
+            }
+        }
+        .weather-info {
+            height: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .temperature {
+                padding: 2rem;
+                display: flex;
+                font-size: 6rem;
+                p {
+                    font-size: 0.5em;
+                    color: $hightlight2;
+                }
+            }
+            .condition {
+                font-size: 2rem;
+                text-align: center;
+            }
+            .day-location {
+                color: $hightlight2;
+                margin-bottom: 2rem;
+
+                div {
+                    vertical-align: middle;
+                    @include center-flex;
+                    margin: 1rem;
+                }
+            }
+        }
     }
-  }
 }
 @media (min-width: 912px) {
-  .current-weather {
-    height: 100vh;
-  }
-  .weather-highlights {
-    height: 100vh;
-  }
+    .current-weather {
+        height: 100vh;
+    }
+    .weather-highlights {
+        height: 100vh;
+    }
 }
 @media (min-width: 812px) {
-  .current-weather {
-      grid-column: span 1;
-
+    .current-weather {
+        grid-column: span 1;
     }
 }
 .weather-highlights {
-  grid-column: span 2;
-  min-height: 850px;
-  background-color: $dark-background;
-  @include center-flex;
-  flex-direction: column;
-  padding: 2rem 0;
-  padding-top: 100px;
-  position: relative;
-
-  .measurement {
-    position: absolute;
-    width: 85%;
-    height: 50px;
-    top: 0;
-    gap: .5rem;
-
-    .toggle-measure-btns {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      display: flex;
-      gap: 1rem;
-
-      button {
-        border-radius: 50%;
-        padding: .75rem;
-        font-size: 1.2rem;
-        color: white;
-        background-color: #585676;
-        border: none;
-      }
-      .active {
-        background-color: white;
-        color: black;
-      }
-    }
-
-    
-  }
-  .forecast {
-    width: 85%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, 125px);
-    align-items: center;
-    justify-content: center;
-
-    .forecast-card {
-      background-color: $lighter-background;
-      aspect-ratio: 120/177;
-      position: relative;
-      @include center-flex;
-      flex-direction: column;
-      justify-content: space-around;
-
-      .full-date {
-        position: absolute;
-        top: 10%;
-      }
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-60%, -60%);
-        width: 60%;
-      }
-      .temps {
-        bottom: 10%;
-        position: absolute;
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        .min {
-          color: rgba($color: white, $alpha: 0.6);
-        }
-      }
-    }
-  }
-
-  .highlights {
-    width: 85%;
-    display: flex;
+    grid-column: span 2;
+    min-height: 750px;
+    background-color: $dark-background;
+    @include center-flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
+    padding: 2rem 0;
+    padding-top: 100px;
+    position: relative;
 
-    .highlights-title {
-      align-self: flex-start;
-      margin: 1rem;
+    .measurement {
+        position: absolute;
+        width: 85%;
+        height: 50px;
+        top: 0;
+        gap: 0.5rem;
+
+        .toggle-measure-btns {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            display: flex;
+            gap: 1rem;
+
+            button {
+                border-radius: 50%;
+                padding: 0.75rem;
+                font-size: 1.2rem;
+                color: white;
+                background-color: #585676;
+                border: none;
+            }
+            .active {
+                background-color: white;
+                color: black;
+            }
+        }
+    }
+    .forecast {
+        width: 85%;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, 125px);
+        align-items: center;
+        justify-content: center;
+
+        .forecast-card {
+            background-color: $lighter-background;
+            aspect-ratio: 120/177;
+            position: relative;
+            @include center-flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .full-date {
+                position: absolute;
+                top: 10%;
+            }
+            img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-60%, -60%);
+                width: 60%;
+            }
+            .temps {
+                bottom: 10%;
+                position: absolute;
+                width: 80%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .min {
+                    color: rgba($color: white, $alpha: 0.6);
+                }
+            }
+        }
     }
 
-    .highlights-container {
-      width: 100%;
-      gap: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, 250px);
-      align-items: center;
-      justify-content: center;
-
-      .highlight-card {
-        background-color: $lighter-background;
-        // aspect-ratio: 3/2;
-        // min-height: 100px;
-        height: auto;
-        @include center-flex;
+    .highlights {
+        width: 85%;
+        display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        padding-bottom: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
 
-        * {
-          margin: 1rem 0;
+        .highlights-title {
+            align-self: flex-start;
+            margin: 1rem;
         }
 
-        .stat {
-          @include center-flex;
+        .highlights-container {
+            width: 100%;
+            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 250px);
+            align-items: center;
+            justify-content: center;
 
-          h3 {
-            font-size: 3rem;
-            margin: 0;
-          }
-          p {
-            margin: 0;
-          }
-        }
-        .wind-direction {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 40px;
-          margin: 0.5rem 0;
+            .highlight-card {
+                background-color: $lighter-background;
+                // aspect-ratio: 3/2;
+                // min-height: 100px;
+                height: auto;
+                @include center-flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                padding-bottom: 0.5rem;
 
-          p {
-            color: rgba($color: white, $alpha: 0.5);
-          }
+                * {
+                    margin: 1rem 0;
+                }
+
+                .stat {
+                    @include center-flex;
+
+                    h3 {
+                        font-size: 3rem;
+                        margin: 0;
+                    }
+                    p {
+                        margin: 0;
+                    }
+                }
+                .wind-direction {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 40px;
+                    margin: 0.5rem 0;
+
+                    p {
+                        color: rgba($color: white, $alpha: 0.5);
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @media (max-width: 600px) {
-  .weather-highlights {
-    min-height: 1000px;
-    .forecast {
-      width: 90%;
+    .weather-highlights {
+        min-height: 1000px;
+        .forecast {
+            width: 90%;
+        }
     }
-  }
 }
