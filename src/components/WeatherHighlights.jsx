@@ -1,24 +1,36 @@
 import React from "react";
 import ThreeDayForecast from "./ThreeDayForecast";
+import HourlyForecast from "./HourlyForecast";
 import Highlights from "./Highlights";
 import { useWeatherStatsContext } from "../contexts/WeatherContext";
 
 export default function WeatherHighlights() {
-  const {isMetric, setIsMetric} = useWeatherStatsContext();
+    const { isMetric, setIsMetric } = useWeatherStatsContext();
 
-  function toggleMetric() {
-    setIsMetric(prev => !prev);
-  }
-  return (
-    <section className="weather-highlights">
-      <div className="measurement">
-        <div className="toggle-measure-btns">
-        <button className={isMetric ? "active" : null} onClick={toggleMetric}>°C</button>
-        <button className={!isMetric ? "active" : null} onClick={toggleMetric}>°F</button>
-        </div>
-      </div>
-      <ThreeDayForecast />
-      <Highlights />
-    </section>
-  );
+    function toggleMetric() {
+        setIsMetric((prev) => !prev);
+    }
+    return (
+        <section className="weather-highlights">
+            <div className="measurement">
+                <div className="toggle-measure-btns">
+                    <button
+                        className={isMetric ? "active" : null}
+                        onClick={toggleMetric}
+                    >
+                        °C
+                    </button>
+                    <button
+                        className={!isMetric ? "active" : null}
+                        onClick={toggleMetric}
+                    >
+                        °F
+                    </button>
+                </div>
+            </div>
+            <ThreeDayForecast />
+            <HourlyForecast />
+            <Highlights />
+        </section>
+    );
 }
